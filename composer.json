@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Config\\": "config",
+      "Product\\": "src/Product/src",
+      "WebPage\\": "src/WebPage/src"
+    }
+  },
+  "require": {
+    "php": "^7.2",
+    "symfony/http-foundation": "^5.0"
+  }
+}

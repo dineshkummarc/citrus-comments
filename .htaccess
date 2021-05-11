@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+
+   RewriteEngine On
+
+   RewriteCond %{REQUEST_FILENAME}  -f [OR]
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteRule ^(css|images|js|fonts|public) - [L] # You can disable the rewrite for some directories by adding this rule above yours redirects
+
+   RewriteRule ^(.*)$ index.php [L,QSA] # redirect pages to index to enable routing
+
+</IfModule>
