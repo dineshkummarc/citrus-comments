@@ -30,6 +30,7 @@ class ComposerStaticInit7ffd1ee500d238669c01d88ab552e874
         'C' => 
         array (
             'Config\\' => 7,
+            'Comment\\' => 8,
         ),
     );
 
@@ -57,6 +58,10 @@ class ComposerStaticInit7ffd1ee500d238669c01d88ab552e874
         'Config\\' => 
         array (
             0 => __DIR__ . '/../..' . '/config',
+        ),
+        'Comment\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Comment/src',
         ),
     );
 

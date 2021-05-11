@@ -4,9 +4,17 @@ include 'vendor/autoload.php';
 include 'config/dbhelper.php';
 include 'config/MySQLDatabase.php';
 define('TEMPLATE_DIR','./view/');
-//$is_ajax = 'XMLHttpRequest' == ( $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '' );
-//$requestUri = \Symfony\Component\HttpFoundation\Request::createFromGlobals()->getRequestUri();
 
+$action = '';
+$queryString = '';
+$params = [];
+$isAjax = $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']);
+if ($isAjax) {
+    $queryString = $_SERVER['QUERY_STRING'] ?? '';
+    parse_str($queryString, $paramsArray);
+    $action = array_shift($paramsArray);
+    $params = $paramsArray;
+}
 function request_path()
 {
     $request_uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
@@ -26,4 +34,4 @@ function request_path()
 
 $db = new \Config\MySQLDatabase($host, $user, $password, $db);
 $controllerFactory = new \WebPage\Handler\Base\Factory\ControllerFactory($db);
-$controller = $controllerFactory->make(request_path());
+$controller = $controllerFactory->make(request_path(), $action, $params);

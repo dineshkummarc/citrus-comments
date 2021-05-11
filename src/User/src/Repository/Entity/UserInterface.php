@@ -5,5 +5,5 @@ namespace User\Repository\Entity;
 
 interface UserInterface
 {
-    public function get(int $id);
+
 }

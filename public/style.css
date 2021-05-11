@@ -8,11 +8,52 @@
 body {
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
+    letter-spacing: 3px;
+}
+footer,
+header {
+    background-color: rgb(179,158,216);
+    width: 100%;
+    margin: auto;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+footer {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+#login__form {
+    padding-bottom: 10px;
+    display: flex;
+}
+
+#login__form input::placeholder {
+    letter-spacing: 3px;
+}
+
+#login__form input {
+    height: 40px;
+    margin-right: 10px;
+}
+
+#login__form button{
+    width: 150px;
+    height: 40px;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+    justify-content: center;
 }
 
 nav ul {
     list-style-type: none;
-    background-color:red;
 }
 
 section {
@@ -30,7 +71,7 @@ section {
 }
 
 .row .product {
-    max-width: 33.3%;
+    width: 33.3%;
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -38,6 +79,7 @@ section {
     align-items: center;
     border:1px solid rgb(249, 249, 249);
     padding: 5%;
+    text-align: center;
 }
 
 .row .product:hover {
@@ -66,11 +108,45 @@ section {
     font-size: 14px;
 }
 
+.row.columns-3:last-child .product {
+    border-bottom: none;
+}
+
+/** COMMENTS **/
+.comments {
+    border-top: 1px solid rgb(249, 249, 249);
+}
+
+section > h1 {
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.comment__item {
+    border-bottom: 1px solid rgb(249, 249, 249);
+    padding-bottom: 40px;
+    padding-top: 20px;
+}
+
+.comment__top {
+    margin-bottom: 40px;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+
+.comment__item p {
+    font-weight: 200;
+    color: black;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+
 /** FORM **/
 
 #comment__form {
-    border: 1px solid rgb(249, 249, 249);
     padding: 10px;
+    width: 50%;
+    margin: auto;
 }
 
 #comment__form > div {
@@ -87,10 +163,24 @@ section {
 
 #comment__form input {
     border-bottom: 1px solid rgb(249, 249, 249);
+    width: 100%;
+    padding-bottom: 10px;
 }
 
+#comment__form input::placeholder {
+    letter-spacing: 3px;
+}
+.comments button,
 #comment__form button {
     display: flex;
+    margin: auto;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    width: 150px;
+    text-align: center;
+    justify-content: center;
 }
 
 button {
@@ -104,13 +194,29 @@ button:hover {
     background: rgba(169, 206, 194, 0.9);
 }
 
+.loginErrorSuccess {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+#login__error,
 #error {
     display:none;
 }
-
+#login__success,
+#success {
+    display: none;
+}
+#login__error.active,
 #error.active {
     display: block;
     color: red;
+}
+#login__success.active,
+#success.active {
+    display: block;
+    color: green;
 }
 
 footer {

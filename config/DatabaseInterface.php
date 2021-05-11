@@ -10,4 +10,6 @@ interface DatabaseInterface
      * @return mixed
      */
     public function fetch(string $query);
+
+    public function insert(string $query);
 }

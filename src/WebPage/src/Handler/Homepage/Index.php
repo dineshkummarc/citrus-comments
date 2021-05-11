@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace WebPage\Handler\Homepage;
 
+use Comment\Repository\Entity\CommentInterface;
 use Product\Repository\Entity\ProductInterface;
 use WebPage\Handler\Base\AbstractController;
 
@@ -19,18 +20,32 @@ class Index extends AbstractController
      * @var \Product\Formatter\Entity\ProductInterface
      */
     private $productFormatter;
+    /**
+     * @var CommentInterface
+     */
+    private $commentRepository;
+    /**
+     * @var \Comment\Formatter\Entity\CommentInterface
+     */
+    private $commentFormatter;
 
     /**
      * Homepage constructor.
      * @param ProductInterface $productRepository
+     * @param CommentInterface $commentRepository
      * @param \Product\Formatter\Entity\ProductInterface $productFormatter
+     * @param \Comment\Formatter\Entity\CommentInterface $commentFormatter
      */
     public function __construct(
         ProductInterface $productRepository,
-        \Product\Formatter\Entity\ProductInterface $productFormatter
+        CommentInterface $commentRepository,
+        \Product\Formatter\Entity\ProductInterface $productFormatter,
+        \Comment\Formatter\Entity\CommentInterface $commentFormatter
     ) {
         $this->productRepository = $productRepository;
+        $this->commentRepository = $commentRepository;
         $this->productFormatter = $productFormatter;
+        $this->commentFormatter = $commentFormatter;
         $this->tplName = self::TPL_NAME;
         parent::__construct($this->tplName);
     }
@@ -42,8 +57,11 @@ class Index extends AbstractController
     public function read(): array{
         $products = $this->productRepository->getAll();
         $formattedProducts = $this->productFormatter->format($products);
+        $comments = $this->commentRepository->getAllApproved();
+        $formattedComments = $this->commentFormatter->format($comments);
         return [
-            'products' => $formattedProducts
+            'products' => $formattedProducts,
+            'comments' => $formattedComments
         ];
     }
 

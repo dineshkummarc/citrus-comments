@@ -12,4 +12,5 @@ return array(
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
     'Product\\' => array($baseDir . '/src/Product/src'),
     'Config\\' => array($baseDir . '/config'),
+    'Comment\\' => array($baseDir . '/src/Comment/src'),
 );

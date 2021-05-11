@@ -29,11 +29,15 @@ class MySQLDatabase implements DatabaseInterface
     public function fetch(string $query) {
         $result = $this->conn->query($query);
         if ($result->num_rows === 0) {
-            printf("No results");
-            exit();
+//            printf("No results");
+//            exit();
         }
         $result = $result->fetch_all(MYSQLI_ASSOC);
         return $result;
+    }
+
+    public function insert(string $query) {
+        return $this->conn->query($query);
     }
 
 }

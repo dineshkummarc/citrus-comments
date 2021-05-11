@@ -11,5 +11,5 @@ use WebPage\Handler\Base\ControllerInterface;
  */
 interface ControllerFactoryInterface
 {
-    public function make(string $slug): ControllerInterface;
+    public function make(string $route, string $action, array $params);
 }
