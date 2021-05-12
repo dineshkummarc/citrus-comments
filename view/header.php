@@ -1,10 +1,20 @@
 <header>
     <nav>
         <ul>
-            <li><a href="user">User</a></li>
+            <?php
+            if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+                echo "You are logged in as " . $_SESSION['username'];
+            ?>
             <li><a href="comment-manager">comment-manager</a></li>
+            <?php } ?>
         </ul>
     </nav>
+    <?php if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) { ?>
+        <div class="logout">
+            <a href="">Logout</a>
+        </div>
+    <?php } else { ?>
+
     <div class="login">
         <form id="login__form">
             <input type="text" name="username" placeholder="username">
@@ -16,4 +26,5 @@
             </div>
         </form>
     </div>
+    <?php } ?>
 </header>

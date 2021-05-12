@@ -13,7 +13,7 @@ class Id2Title
     const COMMENT_STATUS_APPROVED_TITLE = 'approved';
     const COMMENT_STATUS_BLOCKED_TITLE = 'blocked';
 
-    public function resolve(int $id){
+    public static function resolveTitle(int $id){
         switch ($id) {
             case self::COMMENT_STATUS_PENDING_ID;
                 return self::COMMENT_STATUS_PENDING_TITLE;
@@ -21,6 +21,17 @@ class Id2Title
                 return self::COMMENT_STATUS_APPROVED_TITLE;
             case self::COMMENT_STATUS_BLOCKED_ID;
                 return self::COMMENT_STATUS_BLOCKED_TITLE;
+        }
+    }
+
+    public static function resolveId(string $status){
+        switch ($status) {
+            case self::COMMENT_STATUS_PENDING_TITLE;
+                return self::COMMENT_STATUS_PENDING_ID;
+            case self::COMMENT_STATUS_APPROVED_TITLE;
+                return self::COMMENT_STATUS_APPROVED_ID;
+            case self::COMMENT_STATUS_BLOCKED_TITLE;
+                return self::COMMENT_STATUS_BLOCKED_ID;
         }
     }
 }

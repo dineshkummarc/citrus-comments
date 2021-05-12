@@ -1,4 +1,5 @@
 <?php
+session_start();
 // echo (var_dump($data['products']));
  $products = $data['products'];
  $comments = $data['comments'];

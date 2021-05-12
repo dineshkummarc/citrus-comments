@@ -5,6 +5,7 @@ namespace WebPage\Handler\CommentManager;
 
 use Comment\Entity\Comment;
 use Comment\Repository\Entity\CommentInterface;
+use Comment\Utils\Status\Id2Title;
 use WebPage\Handler\Base\AbstractController;
 
 /**
@@ -36,7 +37,7 @@ class CommentManager extends AbstractController
 
     public function read(): array
     {
-        $comments = $this->commentRepository->getAll();
+        $comments = $this->commentRepository->getAllWithStatus(Id2Title::COMMENT_STATUS_PENDING_ID);
         $formattedComments = $this->commentFormatter->format($comments);
         return [
             'comments' => $formattedComments

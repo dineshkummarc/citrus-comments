@@ -3,13 +3,10 @@ declare(strict_types=1);
 
 namespace Comment\Entity;
 
+
 use Comment\Entity\Status\StatusInterface;
 
-/**
- * Interface CommentInterface
- * @package Comment\Entity
- */
-interface CommentInterface
+interface NewCommentInterface
 {
     public function getUsername(): string;
 
@@ -18,6 +15,4 @@ interface CommentInterface
     public function getContent(): string;
 
     public function getStatusEntity(): StatusInterface;
-
-    public function getId(): int;
 }

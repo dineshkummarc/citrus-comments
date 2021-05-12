@@ -20,14 +20,15 @@ class Comment implements CommentInterface
     public function make(array $data): \Comment\Entity\CommentInterface
     {
         $statusId = isset($data['status']) ? (int) $data['status'] :  1;
-        $statusResolver = new Id2Title();
-        $statusTitle = $statusResolver->resolve($statusId);
+        $statusTitle = Id2Title::resolveTitle($statusId);
         $statusEntity = new Status($statusId, $statusTitle);
+        $commentId = (int) $data['id'];
         return new \Comment\Entity\Comment(
             $data['name'],
             $data['email'],
             $data['content'],
-            $statusEntity
+            $statusEntity,
+            $commentId
         );
     }
 }

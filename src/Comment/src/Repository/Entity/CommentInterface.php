@@ -5,7 +5,8 @@ namespace Comment\Repository\Entity;
 
 interface CommentInterface
 {
-    public function insert(\Comment\Entity\CommentInterface $comment);
+    public function update(int $commentId, int $newStatusId);
     public function getAll();
     public function getAllApproved();
+    public function getAllWithStatus(int $statusId);
 }

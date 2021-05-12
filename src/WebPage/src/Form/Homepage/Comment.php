@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WebPage\Form\Homepage;
 
-use Comment\Repository\Entity\CommentInterface;
+use Comment\FactoryMethod\Entity\NewCommentInterface;
 
 /**
  * Class Comments
@@ -12,25 +12,25 @@ use Comment\Repository\Entity\CommentInterface;
 class Comment
 {
     /**
-     * @var CommentInterface
+     * @var \Comment\Repository\Entity\NewCommentInterface
      */
-    private $commentRepository;
+    private $newCommentRepository;
     /**
      * @var array
      */
     private $params;
     /**
-     * @var \Comment\FactoryMethod\Entity\CommentInterface
+     * @var NewCommentInterface
      */
     private $commentFactoryMethod;
 
     public function __construct(
         array $params,
-        CommentInterface $commentRepository,
-        \Comment\FactoryMethod\Entity\CommentInterface $commentFactoryMethod
+        \Comment\Repository\Entity\NewCommentInterface $commentRepository,
+        NewCommentInterface $commentFactoryMethod
     ){
         $this->params = $params;
-        $this->commentRepository = $commentRepository;
+        $this->newCommentRepository = $commentRepository;
         $this->commentFactoryMethod = $commentFactoryMethod;
         $this->ajaxHandler($this->params);
     }
@@ -40,7 +40,7 @@ class Comment
      */
     private function ajaxHandler(array $params) {
         $comment = $this->commentFactoryMethod->make($params);
-        $isSuccessful = $this->commentRepository->insert($comment);
+        $isSuccessful = $this->newCommentRepository->insert($comment);
         $msg = $isSuccessful ? '' : 'Comment insert fail';
         $data = ['success' => $isSuccessful, 'message' => $msg];
         header('Content-Type: application/json');

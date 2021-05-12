@@ -29,10 +29,9 @@ class Comment implements CommentInterface
         $this->db = $database;
     }
 
-    public function insert(\Comment\Entity\CommentInterface $comment)
+    public function update(int $commentId, int $newStatusId)
     {
-        return $this->db->insert("INSERT INTO `comment` (name, email, content)
-            VALUES ('{$comment->getUsername()}', '{$comment->getEmail()}', '{$comment->getContent()}')");
+        return $this->db->insert("UPDATE `comment` SET status='{$newStatusId}' WHERE id=" . $commentId);
     }
 
     public function getAll()
@@ -43,5 +42,10 @@ class Comment implements CommentInterface
     public function getAllApproved()
     {
         return $this->db->fetch("SELECT * FROM `comment` WHERE status=" . self::COMMENT_STATUS_APPROVED_ID);
+    }
+
+    public function getAllWithStatus(int $statusId)
+    {
+        return $this->db->fetch("SELECT * FROM `comment` WHERE status=" . $statusId);
     }
 }

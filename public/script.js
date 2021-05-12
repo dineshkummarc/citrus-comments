@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function (ev) {
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4) {
                 if (this.status == 200) {
-                    console.log('RESPONSE ', this.responseText.success);
+                    console.log('RESPONSE ', this.responseText);
                     commentForm.reset();
                     successElement.classList.add('active');
                     if (errorElement.classList.contains('active')) {
@@ -49,48 +49,83 @@ document.addEventListener("DOMContentLoaded", function (ev) {
 
 
     const loginForm = document.getElementById('login__form');
-    const username = loginForm.querySelector("input[name='username']");
-    const password = loginForm.querySelector("input[name='password']");
-    const loginErrorElement = document.getElementById('login__error');
-    const loginSuccessElement = document.getElementById('login__success');
+    if (loginForm) {
+        const username = loginForm.querySelector("input[name='username']");
+        const password = loginForm.querySelector("input[name='password']");
+        const loginErrorElement = document.getElementById('login__error');
+        const loginSuccessElement = document.getElementById('login__success');
 
-    loginForm.addEventListener('submit', function (ev) {
-        ev.preventDefault();
-        let errors = [];
-        if (username.value === '' || username.value == null) {
-            errors.push('Fill in username');
-        }
-        if (password.value === '' || password.value == null) {
-            errors.push('Fill in password');
-        }
-
-        if(errors.length > 0) {
-            loginErrorElement.innerText = errors.join(', ');
-            loginErrorElement.classList.add('active');
-            if (loginSuccessElement.classList.contains('active')) {
-                loginSuccessElement.classList.remove('active');
+        loginForm.addEventListener('submit', function (ev) {
+            ev.preventDefault();
+            let errors = [];
+            if (username.value === '' || username.value == null) {
+                errors.push('Fill in username');
             }
-            return;
-        }
+            if (password.value === '' || password.value == null) {
+                errors.push('Fill in password');
+            }
 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                if (this.status == 200) {
-                    console.log('RESPONSE ', this.responseText.success);
-                    loginForm.reset();
-                    loginSuccessElement.classList.add('active');
-                    if (loginErrorElement.classList.contains('active')) {
-                        loginErrorElement.classList.remove('active');
-                    }
-                    loginSuccessElement.innerText = 'Success';
-                } else {
-                    console.log('Failed async call');
+            if(errors.length > 0) {
+                loginErrorElement.innerText = errors.join(', ');
+                loginErrorElement.classList.add('active');
+                if (loginSuccessElement.classList.contains('active')) {
+                    loginSuccessElement.classList.remove('active');
                 }
+                return;
             }
-        };
-        xmlhttp.open("POST", `?action=login&name=${username.value}&password=${password.value}`, true);
-        xmlhttp.send();
-    });
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        console.log('RESPONSE ', this.responseText);
+                        let res = JSON.parse(this.responseText);
+                        if (res.success) {
+                            window.location.href = window.location.origin + window.location.pathname;
+                        } else {
+                            loginErrorElement.classList.add('active');
+                            loginErrorElement.innerText = 'Wrong login credentials';
+                        }
+                        loginForm.reset();
+                        // loginSuccessElement.classList.add('active');
+                        // if (loginErrorElement.classList.contains('active')) {
+                        //     loginErrorElement.classList.remove('active');
+                        // }
+                        // loginSuccessElement.innerText = 'Success';
+                    } else {
+                        console.log('Failed async call');
+                    }
+                }
+            };
+            xmlhttp.open("POST", `?action=login&name=${username.value}&password=${password.value}`, true);
+            xmlhttp.send();
+        });
+    }
+
+    const logout = document.querySelector('.logout > a');
+    if (logout) {
+        logout.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        console.log('RESPONSE ', this.responseText);
+                        let res = JSON.parse(this.responseText);
+                        if(res.success) {
+                            window.location.href = window.location.origin + "/Citrus";
+                        } else {
+                            console.log("Failed to logout");
+                        }
+                    } else {
+                        console.log('Failed async call');
+                    }
+                }
+            };
+            xmlhttp.open("POST", `?action=logout`, true);
+            xmlhttp.send();
+        });
+    }
+
 
 });
