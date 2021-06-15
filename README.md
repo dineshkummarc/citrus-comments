@@ -1,4 +1,4 @@
-# test
+# Citrus
 Custom mvc framework for a fruit store in plain PHP.
 - [x] Display Products
 - [x] Display Comments
