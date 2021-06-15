@@ -1,5 +1,5 @@
 # Citrus
-Custom mvc framework for a fruit store in plain PHP.
+Custom MVC Framework developed for a citrus store in PHP.
 - [x] Display Products
 - [x] Display Comments
 - [x] Comment form
