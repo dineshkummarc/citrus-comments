@@ -5,10 +5,7 @@ Custom MVC Framework developed for a citrus store in PHP.
 - [x] Comment form
 - [x] Admin Login
 - [x] Admin Approve/Block comment
-
 # Homepage
 ![Home](https://user-images.githubusercontent.com/23150870/120886973-df0e2080-c5f0-11eb-8b5a-ecd0de0632ea.png)
-
-
 # Manage comments page
 ![Manage comments](https://user-images.githubusercontent.com/23150870/120887179-b175a700-c5f1-11eb-84de-82e837c9df20.png)
